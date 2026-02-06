@@ -24,11 +24,14 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      
 
       - name: Debug GitHub context
         run: |
           echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
+          echo "GITHUB_REF_NAME=${GITHUB_REF_NAME}"
+          echo "GITHUB_ACTOR=${GITHUB_ACTOR}"
+          echo "GITHUB_EVENT_NAME=${GITHUB_EVENT_NAME}"
+
 
       - name: Google Auth (Workload Identity Federation)
         id: auth
