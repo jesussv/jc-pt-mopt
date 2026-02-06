@@ -1,0 +1,63 @@
+name: Deploy to Cloud Run
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+
+env:
+  PROJECT_ID: "evocative-reef-133021"
+  REGION: "us-central1"
+  REPO: "jc-repo"
+
+  SERVICE_DEV: "c-location-ingest-dev"
+  SERVICE_PROD: "c-location-ingest"
+
+  SERVICE_DIR: "services/JC.LocationIngest"
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Google Auth (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/846193025977/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: "jc-cloudrun-pt@evocative-reef-133021.iam.gserviceaccount.com"
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker auth for Artifact Registry
+        run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
+
+      - name: Select service by branch
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "develop" ]; then
+            echo "SERVICE=${{ env.SERVICE_DEV }}" >> $GITHUB_ENV
+          else
+            echo "SERVICE=${{ env.SERVICE_PROD }}" >> $GITHUB_ENV
+          fi
+
+      - name: Build and Push image
+        working-directory: ${{ env.SERVICE_DIR }}
+        run: |
+          IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.SERVICE }}:${{ github.sha }}"
+          docker build -t "$IMAGE" .
+          docker push "$IMAGE"
+          echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
+      - name: Deploy to Cloud Run
+        run: |
+          gcloud run deploy "${{ env.SERVICE }}" \
+            --image "${{ env.IMAGE }}" \
+            --region "${{ env.REGION }}" \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 8080
