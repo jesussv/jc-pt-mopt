@@ -65,7 +65,8 @@ jobs:
         working-directory: ${{ env.SERVICE_DIR }}
         run: |
           IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.SERVICE }}:${{ github.sha }}"
-          docker build -t "$IMAGE" -f services/JC.LocationIngest/Dockerfile .
+          docker build --progress=plain --no-cache -t "$IMAGE" -f services/JC.LocationIngest/Dockerfile .
+
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
 
