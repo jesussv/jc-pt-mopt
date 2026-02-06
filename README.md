@@ -1,6 +1,14 @@
 # Documento de Diseño Técnico Sistema de Control de Inventario y Stock (SCIS)
 #### Por: Jehovani Chavez
-
+## Instrucciones de instalación
+1. Nos registramos en Google Cloud e ingresamos a Cloud SQL.
+   ![](https://github.com/jesussv/jc-pt-mopt/blob/main/Cloud%20SQL.jpg)
+2. Creamos una Instancia seleccionando el servidor con el plan que necesitemos con PostgreSQL.
+   ![](https://github.com/jesussv/jc-pt-mopt/blob/main/InstanciaGoogleCloud.jpg)
+3. Creamos una nueva base de datos y abrimos el archivo backup_schema.sql con bloc de notsa u otro editor para copiar el contenido y pegarlo en el editor
+   ![](https://github.com/jesussv/jc-pt-mopt/blob/main/bd.jpg)
+4. Descargamos el proyecto adjunto.
+   
 ## Selección de Tecnologías. 
 ### Backend
 #### Para el sistema de gestión de inventarios, yo lo justifico así:
@@ -45,5 +53,12 @@ Patrón arquitectónico: Modular Monolith escalable según necesidades futuras.
 ![](https://github.com/jesussv/jc-pt-mopt/blob/assets/SCIS_C4_Nivel3_Componentes.jpg)
 #### 4- 4-	Diagrama de código:
 ![](https://github.com/jesussv/jc-pt-mopt/blob/assets/SCIS_C4_Nivel4_Codigo.jpg)
+
+## Estrategia de Branching
+### Se utilizará Trunk Based Development, PR cortos y frecuentes + CI fuerte + feature flags, porque así 8 devs pueden trabajar en paralelo sin crear conflictos bloqueantes ni ramas eternas.
+#### Flujo a utilizar:
+![](https://github.com/jesussv/jc-pt-mopt/blob/assets/SCIS_Git_Branching_Flujo.jpg)
+
+
 
 
