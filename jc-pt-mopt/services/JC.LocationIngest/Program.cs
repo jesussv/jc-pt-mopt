@@ -12,6 +12,12 @@ using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
+Console.WriteLine("✅ JC.LocationIngest: starting...");
+Console.WriteLine($"ENV ASPNETCORE_ENVIRONMENT={builder.Environment.EnvironmentName}");
+Console.WriteLine($"ENV PORT={Environment.GetEnvironmentVariable("PORT")}");
+Console.WriteLine($"ENV ASPNETCORE_URLS={Environment.GetEnvironmentVariable("ASPNETCORE_URLS")}");
+
+
 builder.Services.AddEndpointsApiExplorer();
 
 // ===============================
@@ -1086,6 +1092,7 @@ values
     return op;
 });
 
+Console.WriteLine("✅ JC.LocationIngest: about to run web server...");
 
 
 app.Run();
