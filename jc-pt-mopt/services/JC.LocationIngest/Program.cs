@@ -1085,5 +1085,8 @@ values
     op.Description = "Valida stock (OUT) y registra historial en JCInventTrans. CreatedByRecId se toma del JWT (sub).";
     return op;
 });
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://0.0.0.0:{port}");
+
 
 app.Run();
