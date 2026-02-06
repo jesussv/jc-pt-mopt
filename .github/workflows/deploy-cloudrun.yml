@@ -12,7 +12,7 @@ env:
   SERVICE_DEV: "c-location-ingest-dev"
   SERVICE_PROD: "c-location-ingest"
 
-  SERVICE_DIR: "jc-pt-mopt/services/JC.LocationIngest"
+  SERVICE_DIR: "jc-pt-mopt"
 
 jobs:
   deploy:
@@ -54,9 +54,10 @@ jobs:
         working-directory: ${{ env.SERVICE_DIR }}
         run: |
           IMAGE="${{ env.REGION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPO }}/${{ env.SERVICE }}:${{ github.sha }}"
-          docker build -t "$IMAGE" .
+          docker build -t "$IMAGE" -f services/JC.LocationIngest/Dockerfile .
           docker push "$IMAGE"
           echo "IMAGE=$IMAGE" >> $GITHUB_ENV
+
 
       - name: Deploy to Cloud Run
         run: |
