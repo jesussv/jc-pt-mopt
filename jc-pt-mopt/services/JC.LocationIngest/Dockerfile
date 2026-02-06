@@ -11,7 +11,13 @@ COPY . .
 
 # Publicamos desde el folder del proyecto (más estable)
 WORKDIR /src/services/JC.LocationIngest
-RUN dotnet publish JC.LocationIngest.csproj -c Release -o /app/publish
+RUN dotnet --info
+RUN ls -la
+RUN ls -la /src/services/JC.LocationIngest
+RUN dotnet build JC.LocationIngest.csproj -c Release -v minimal
+
+RUN dotnet publish JC.LocationIngest.csproj -c Release -o /app/publish -v minimal
+
 
 # Runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
