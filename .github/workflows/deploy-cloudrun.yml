@@ -31,17 +31,21 @@ jobs:
           echo "GITHUB_REPOSITORY=${GITHUB_REPOSITORY}"
 
       - name: Google Auth (Workload Identity Federation)
+        id: auth
         uses: google-github-actions/auth@v2
         with:
+          token_format: "access_token"
           workload_identity_provider: "projects/846193025977/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
           service_account: "jc-cloudrun-pt@evocative-reef-133021.iam.gserviceaccount.com"
+
 
       - name: Setup gcloud
         uses: google-github-actions/setup-gcloud@v2
 
       - name: Docker login to Artifact Registry
         run: |
-            gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin us-central1-docker.pkg.dev
+          echo "${{ steps.auth.outputs.access_token }}" | docker login -u oauth2accesstoken --password-stdin us-central1-docker.pkg.dev
+
 
       - name: Configure Docker auth for Artifact Registry
         run: gcloud auth configure-docker ${{ env.REGION }}-docker.pkg.dev --quiet
