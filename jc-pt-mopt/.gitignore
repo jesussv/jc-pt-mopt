@@ -1,0 +1,15 @@
+# Visual Studio / .NET build output
+.vs/
+**/bin/
+**/obj/
+
+# Local settings / secrets
+**/appsettings.json
+**/appsettings.*.json
+**/*.Development.json
+.env
+
+# Binaries
+*.exe
+*.dll
+*.pdb
