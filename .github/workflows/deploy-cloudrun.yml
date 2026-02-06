@@ -12,7 +12,7 @@ env:
   SERVICE_DEV: "c-location-ingest-dev"
   SERVICE_PROD: "c-location-ingest"
 
-  SERVICE_DIR: "services/JC.LocationIngest"
+  SERVICE_DIR: "jc-pt-mopt/services/JC.LocationIngest"
 
 jobs:
   deploy:
