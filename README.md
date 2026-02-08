@@ -638,6 +638,109 @@ jobs:
           # Cambia /health por tu endpoint real (ej /status o /healthz)
           curl -f "${{ env.SERVICE_URL }}/health"
 ```
-## Anexo
+## ✅ Resumen operativo (CI/CD + Observabilidad)
+
+<p align="center">
+  <img src="https://img.shields.io/badge/CI-Build%20%2B%20Unit%20Tests-0A66C2?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/CD-Dev%20%E2%86%92%20Prod-2EA44F?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Security-OIDC%20(WIF)-222222?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Smoke-Post--Deploy-6F42C1?style=for-the-badge" />
+</p>
+
+- **CI (Integración continua):** cada PR corre **build + unit tests**. Si falla, **no se mezcla** el cambio.  
+- **CD (Despliegue continuo):** merge/push a `develop` despliega a **Dev**; merge a `main` despliega a **Prod**.  
+- **Seguridad:** **Workload Identity Federation** (GitHub se autentica **sin llaves**).  
+- **Calidad:** siempre pasa por CI antes del deploy y luego se ejecuta **smoke test post-deploy**.
+
+---
+
+## 📡 Observabilidad (Logs, Errores, Trazas y Métricas)
+
+### Logging centralizado: ¿Cómo rastreo un error distribuido?
+
+#### Herramientas GCP que aplican directo
+- **Cloud Logging:** logs de Cloud Run (stdout/stderr + logs estructurados).
+- **Error Reporting:** agrupa excepciones y muestra “top errors” por servicio/revisión.
+- **Cloud Trace:** traza requests end-to-end para ver cuellos de botella y fallos.
+- **(Opcional recomendado) OpenTelemetry:** estandariza trace/span y correlación entre servicios.
+
+---
+
+### Estrategia recomendada (efectiva y práctica)
+
+#### 1) Correlación por `correlationId`
+- Cada request debe tener un `correlationId`:
+  - Si viene por header, se respeta.
+  - Si no viene, se genera.
+- Ese `correlationId` se incluye en **todos los logs**.
+- Así se sigue el hilo: **API → DB → (otros componentes)** con un solo ID.
+
+#### 2) Logs estructurados (JSON)
+Loggear en JSON para filtrar rápido por campos:
+- `service`, `env`, `revision`, `correlationId`, `user`, `endpoint`, `status`, `durationMs`, `traceId`.
+
+#### 3) Trace + Logs (flujo típico)
+1. En **Cloud Logging**, filtro por `severity=ERROR` y/o `correlationId`.
+2. Encuentro el log del error → tomo `traceId`/request.
+3. Abro **Cloud Trace** → veo dónde falló o dónde se fue el tiempo.
+4. Si es recurrente, **Error Reporting** lo agrupa y muestra tendencia.
+
+#### 4) Separación por ambiente
+- Incluir siempre `ENV=Development/Production` (ya lo define `ASPNETCORE_ENVIRONMENT`).
+- Evita mezclar ruido de dev con producción.
+
+---
+
+## 📊 Métricas: KPIs técnicos recomendados
+
+### Cloud Run (servicio)
+
+**Rendimiento**
+- **Latencia:** p50 / p95 / p99 *(la p95 es la que más duele en usuario real)*
+- **Throughput:** requests por segundo/minuto
+- **Concurrencia:** requests concurrentes por instancia
+
+**Estabilidad**
+- **Error rate:** 5xx (servicio) y 4xx (cliente/validación; si suben puede ser bug o contrato roto)
+- **Crashes / reinicios:** OOM, errores fatales
+
+**Capacidad**
+- CPU y memoria por instancia
+- Número de instancias (autoscaling) y picos
+- Señales de **cold starts** (picos de latencia + escalado)
+
+---
+
+### Cloud SQL (base de datos)
+- **Conexiones activas** (si se disparan, te tumba la app)
+- CPU / Memoria
+- Latencia de queries
+- IO/Disk
+- Errores de conexión (timeouts, refused, pool agotado)
+
+---
+
+## 🚨 Alertas recomendadas (para no enterarte por el usuario)
+
+En **Cloud Monitoring**:
+- Error rate **5xx > X%** por 5–10 min
+- Latencia **p95 > umbral** (ej. 800ms–1s según objetivo)
+- CPU o Memoria > 80–90% sostenido
+- Conexiones Cloud SQL cerca del límite
+- Healthcheck fallando / caída total
+
+---
+
+## 🧩 “La historia completa” cuando algo falla
+
+Cuando alguien diga “se cayó inventario” o “OUT no funciona”:
+1. Reviso **Error Reporting** (excepción y tendencia).
+2. Si tengo `correlationId`, filtro en **Cloud Logging**.
+3. Veo endpoint, status, duración y contexto del error.
+4. Abro **Cloud Trace** para ubicar el punto exacto de falla/lentitud.
+5. Reviso **Cloud Monitoring** para confirmar si fue Cloud Run o Cloud SQL.
+
+## Anexos
+
 
 
