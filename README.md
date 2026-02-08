@@ -59,20 +59,19 @@
 - gcloud auth login
 - gcloud config set project (Nombre proyecto)
 - gcloud config set run/region
-
+---
 Pasos.
 1. Hay que Ubicarse en la carpeta donde está el backend (donde está el .csproj):
    cd services/JC.LocationIngest
-
-
-2. Deploy:
+---
+3. Deploy:
 gcloud run deploy c-location-ingest-dev \
   --source . \
   --region us-central1 \
   --allow-unauthenticated
 la API debe ser privada, quitamos --allow-unauthenticated y usamos IAM.
-
-3. Deploy con Cloud SQL (PostgreSQL) + Secrets
+---
+4. Deploy con Cloud SQL (PostgreSQL) + Secrets
    Cloud SQL y variables sensibles en Secret Manager:
 
 gcloud run deploy c-location-ingest-dev \
@@ -82,17 +81,17 @@ gcloud run deploy c-location-ingest-dev \
   --set-secrets "ConnectionStrings__JCPostgres=jc-connstr:latest,Jwt__Key=jc-jwt-key:latest" \
   --allow-unauthenticated
 
-1. Obtener la URL del servicio
+Obtener la URL del servicio
 gcloud run services describe c-location-ingest-dev \
   --region us-central1 \
   --format="value(status.url)"
-
+---
 5. Validación rápida (health/status)
 
 power-Shell
 curl -s "$(gcloud run services describe c-location-ingest-dev --region us-central1 --format='value(status.url)')/health"
 Ajustar /health por  endpoint real si se llama distinto.
-
+---
 6. Variables de entorno 
 
 Para ver variables configuradas en el contenedor:
