@@ -741,6 +741,20 @@ Cuando alguien diga “se cayó inventario” o “No funciona”:
 4. Abro **Cloud Trace** para ubicar el punto exacto de falla/lentitud.
 5. Reviso **Cloud Monitoring** para confirmar si fue Cloud Run o Cloud SQL.
 
+# Swagger
+
+<p align="center">
+  <img src="https://avatars.githubusercontent.com/u/7658037?s=200&v=4" width="140" alt="Swagger Logo" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/assets/swagger.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/assets/swagger.png" width="720" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/assets/swagger2.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/assets/swagger2.png" width="720" /></a>>
+
+
 ## 📎 Anexos
 
 <p align="center">
