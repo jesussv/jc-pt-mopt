@@ -370,7 +370,7 @@ Como el proyecto está por fases, el planning se alinea así:
 - Validación post despliegue
 ## 🧪 Estrategia de QA (rápido, pero sin quebrar nada)
 
-**Principio:** *Ir rápido sin romper nada.*  
+**Principio:** *Ir rápido sin dañar nada*  
 - Cada **Pull Request** valida **calidad mínima** (quality gate).  
 - Cada merge a **main** valida **integración real**.  
 - Antes de producción validamos el **flujo completo del MVP** con E2E críticos.
@@ -400,7 +400,7 @@ Como el proyecto está por fases, el planning se alinea así:
 
 ---
 
-### 🔗 2) Pruebas de Integración (API + DB + Contratos)
+### 🔗 2) Pruebas de Integración (API + DB + Controller)
 
 **Qué validan**
 - Endpoints funcionando con **base real** y datos reales.
