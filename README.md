@@ -15,6 +15,13 @@
 - [Estrategia de branching](#estrategia-de-branching)
 - [Deploy a Google Cloud Run](#Deploy-a-Google-Cloud-Run)
 - [Demo Movil y Web](#Demo-Movil-y-Web)
+- [Ciclo de Vida, Metodologías Ágiles y Planificación](#Ciclo-de-Vida,-Metodologías-Ágiles-y-Planificación)
+  - [Metodología de trabajo](#Metodología-de-trabajo)
+  - [📅 Cronograma del MVP (Diagrama Gantt)](#📅-Cronograma-del-MVP-(Diagrama-Gantt))
+  - [🧪 Estrategia de QA](#🧪-Estrategia-de-QA)
+- [🏗️ Infraestructura y Automatización](#🏗️-Infraestructura-y-Automatización)
+    - [Pipeline de CI/CD (GitHub → Cloud Run)](#Pipeline-de-CI/CD-(GitHub-→-Cloud-Run))
+    - [Observabilidad (Logs, Errores, Trazas y Métricas)](#Observabilidad-(Logs,-Errores,-Trazas-y-Métricas))
 
 ---
 
@@ -369,7 +376,8 @@ Como el proyecto está por fases, el planning se alinea así:
 - Deploy a producción
 - Validación post despliegue
 
-## 🧪 Estrategia de QA (rápido, pero dañar nada)
+## 🧪 Estrategia de QA
+
 - Cada **Pull Request** valida **calidad mínima** (quality gate).  
 - Cada merge a **main** valida **integración real**.  
 - Antes de producción validamos el **flujo completo del MVP** con E2E críticos.
@@ -468,7 +476,7 @@ Después del deploy a Staging:
 
 ---
 
-## 🗓️ Cómo aterriza al cronograma del MVP
+## 🗓️ Cómo culmina al cronograma del MVP
 
 ### Semanas 3–4 (Backend MVP)
 - Unit tests de reglas de stock y movimientos desde el día 1.
@@ -656,7 +664,7 @@ jobs:
 
 ## 📡 Observabilidad (Logs, Errores, Trazas y Métricas)
 
-### Logging centralizado: ¿Cómo rastreo un error distribuido?
+### Logging centralizado para rastreo de un error distribuido.
 
 #### Herramientas GCP que aplican directo
 - **Cloud Logging:** logs de Cloud Run (stdout/stderr + logs estructurados).
@@ -720,7 +728,7 @@ Loggear en JSON para filtrar rápido por campos:
 
 ---
 
-## 🚨 Alertas recomendadas (para no enterarte por el usuario)
+## 🚨 Alertas recomendadas
 
 En **Cloud Monitoring**:
 - Error rate **5xx > X%** por 5–10 min
@@ -731,9 +739,9 @@ En **Cloud Monitoring**:
 
 ---
 
-## 🧩 “La historia completa” cuando algo falla
+## 🧩 Cuando algo falla
 
-Cuando alguien diga “se cayó inventario” o “OUT no funciona”:
+Cuando alguien diga “se cayó inventario” o “No funciona”:
 1. Reviso **Error Reporting** (excepción y tendencia).
 2. Si tengo `correlationId`, filtro en **Cloud Logging**.
 3. Veo endpoint, status, duración y contexto del error.
