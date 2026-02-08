@@ -48,13 +48,13 @@
   - **Cloud Run**
   - **Cloud Build**
   - **Artifact Registry**
-  - (Opcional) **Secret Manager**
+  - **Secret Manager**
 - Tener instalado y autenticado `gcloud` (o usar **Cloud Shell**).
 
 ---
 
 ### 1) Autenticación y proyecto
-```bash
+bash
 gcloud auth login
 gcloud config set project evocative-reef-133021
 gcloud config set run/region us-central1
