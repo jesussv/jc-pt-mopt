@@ -61,18 +61,18 @@
 - gcloud config set project (Nombre proyecto)
 - gcloud config set run/region
 ---
-Pasos.
+#### Pasos.
 1. Hay que Ubicarse en la carpeta donde está el backend (donde está el .csproj):
    cd services/JC.LocationIngest
 ---
-3. Deploy:
+2. Deploy:
 gcloud run deploy c-location-ingest-dev \
   --source . \
   --region us-central1 \
   --allow-unauthenticated
 la API debe ser privada, quitamos --allow-unauthenticated y usamos IAM.
 ---
-4. Deploy con Cloud SQL (PostgreSQL) + Secrets
+3. Deploy con Cloud SQL (PostgreSQL) + Secrets
    Cloud SQL y variables sensibles en Secret Manager:
 
 gcloud run deploy c-location-ingest-dev \
@@ -88,14 +88,14 @@ gcloud run services describe c-location-ingest-dev \
   --format="value(status.url)"
 
 ---
-5. Validación rápida (health/status)
+4. Validación rápida (health/status)
 
 power-Shell
 curl -s "$(gcloud run services describe c-location-ingest-dev --region us-central1 --format='value(status.url)')/health"
 Ajustar /health por  endpoint real si se llama distinto.
 
 ---
-6. Variables de entorno 
+5. Variables de entorno 
 
 Para ver variables configuradas en el contenedor:
 
@@ -321,7 +321,7 @@ Como el proyecto está por fases, el planning se alinea así:
 ## 📅 Cronograma del MVP (Diagrama Gantt)
 
 <p align="center">
-  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/_20260207.png" width="720" />
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/_20260207.png" width="1024" />
 </p>
 
 > Este Gantt define el **camino crítico del MVP** y asegura entregas por bloques:  
