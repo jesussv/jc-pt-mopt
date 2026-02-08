@@ -744,27 +744,27 @@ Cuando alguien diga “se cayó inventario” o “No funciona”:
 ## 📎 Anexos
 
 <p align="center">
-  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsqlstudio.jpg"><img src="" width="720" /></a>
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsqlstudio.jpg"><img src="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsqlstudio.jpg" width="720" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun.png"><img src="" width="720" /></a>
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun.png" width="720" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun2.png"><img src="" width="720" /></a>
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun2.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun2.png" width="720" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun3.png"><img src="" width="720" /></a>
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun3.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun3.png" width="720" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsql.png"><img src="" width="720" /></a>
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsql.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsql.png" width="720" /></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/clouderror.png"><img src="" width="720" /></a>
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/clouderror.png"><img src="https://github.com/jesussv/jc-pt-mopt/blob/main/clouderror.png" width="720" /></a>
 </p>
 
 
