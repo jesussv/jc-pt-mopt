@@ -519,7 +519,7 @@ Después del deploy a Staging:
 
 Se crea archivo: `.github/workflows/cloudrun.yml`
 
-```yaml
+```
 name: CI/CD - Cloud Run
 
 on:
@@ -637,7 +637,7 @@ jobs:
         run: |
           # Cambia /health por tu endpoint real (ej /status o /healthz)
           curl -f "${{ env.SERVICE_URL }}/health"
-` ``` `
+```
 ## Anexo
 
 
