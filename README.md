@@ -13,6 +13,7 @@
 - [Motor de base de datos](#motor-de-base-de-datos)
 - [Diagramas de arquitectura](#diagramas-de-arquitectura)
 - [Estrategia de branching](#estrategia-de-branching)
+- [Deploy a Google Cloud Run](#Deploy-a-Google-Cloud-Run)
 
 ---
 
