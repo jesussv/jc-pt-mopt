@@ -104,7 +104,7 @@ gcloud run services describe c-location-ingest-dev \
   --format="yaml(spec.template.spec.containers[0].env)"
 ### Demo Movil y Web
 ## 🚀 DESCARGA LA APP DEMO
-> **Instala SCIS y empezá a probar como controlar un inventario.**  
+> **Instala SCIS y empezá a probar como controlar un inventario. Usuario: demo contraseña: demo1234**  
 ✅ Login seguro • ✅ Entradas/Salidas • ✅ Ajustes • ✅ Transferencias • ✅ Stock por bodega • ✅ Movimientos
 
 <p align="center">
@@ -489,11 +489,9 @@ Después del deploy a Staging:
 ### Semana 7 (Deploy)
 - Solo correcciones y hardening (cero features nuevas).
 - E2E final + smoke + despliegue.
+
 ## 🏗️ Infraestructura y Automatización
-
 ### Pipeline de CI/CD (GitHub → Cloud Run)
-
-#### Cómo aplica este pipeline a lo que tenemos
 **Qué hace el pipeline actual**
 - Push a `develop` → despliega a **Cloud Run Dev** (`c-location-ingest-dev`)
 - Push a `main` → despliega a **Cloud Run Prod** (`c-location-ingest`)
@@ -517,9 +515,9 @@ Después del deploy a Staging:
 
 ---
 
-### YAML (CI + Deploy + Smoke) — listo para pegar
+### YAML (CI + Deploy) 
 
-Crear archivo: `.github/workflows/cloudrun.yml`
+Se crea archivo: `.github/workflows/cloudrun.yml`
 
 ```yaml
 name: CI/CD - Cloud Run
@@ -639,5 +637,6 @@ jobs:
         run: |
           # Cambia /health por tu endpoint real (ej /status o /healthz)
           curl -f "${{ env.SERVICE_URL }}/health"
+::contentReference[oaicite:0]{index=0}
 
 
