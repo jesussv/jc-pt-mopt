@@ -17,9 +17,9 @@
 - [Demo Movil y Web](#Demo-Movil-y-Web)
 - [Ciclo de Vida, Metodologías Ágiles y Planificación](#Ciclo-de-Vida,-Metodologías-Ágiles-y-Planificación)
   - [Metodología de trabajo](#Metodología-de-trabajo)
-  - [Cronograma del MVP Diagrama Gantt](#Cronograma-del-MVP-Diagrama-Gantt))
+  - [Cronograma del MVP Diagrama Gantt](#Cronograma-del-MVP-Diagrama-Gantt)
   - [Estrategia de QA](#Estrategia-de-QA)
-- [🏗️ Infraestructura y Automatización](#🏗️-Infraestructura-y-Automatización)
+- [Infraestructura y Automatización](#Infraestructura-y-Automatización)
     - [Pipeline de CI/CD (GitHub → Cloud Run)](#Pipeline-de-CI/CD-(GitHub-→-Cloud-Run))
     - [Observabilidad (Logs, Errores, Trazas y Métricas)](#Observabilidad-(Logs,-Errores,-Trazas-y-Métricas))
 
@@ -498,7 +498,7 @@ Después del deploy a Staging:
 - Solo correcciones y hardening (cero features nuevas).
 - E2E final + smoke + despliegue.
 
-## 🏗️ Infraestructura y Automatización
+## Infraestructura y Automatización
 ### Pipeline de CI/CD (GitHub → Cloud Run)
 **Qué hace el pipeline actual**
 - Push a `develop` → despliega a **Cloud Run Dev** (`c-location-ingest-dev`)
