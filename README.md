@@ -636,7 +636,7 @@ jobs:
       - name: Smoke Test (health endpoint)
         run: |
           # Cambia /health por tu endpoint real (ej /status o /healthz)
-          curl -f "${{ env.SERVICE_URL }}/health"
-::contentReference[oaicite:0]{index=0}
+          curl -f "${{ env.SERVICE_URL }}/health" ` ``` `
+## Anexo
 
 
