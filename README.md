@@ -21,7 +21,7 @@
   - [Estrategia de QA](#Estrategia-de-QA)
 - [Infraestructura y Automatización](#Infraestructura-y-Automatización)
     - [Pipeline de CI/CD (GitHub → Cloud Run)](#Pipeline-de-CI/CD-(GitHub-→-Cloud-Run))
-    - [Observabilidad (Logs, Errores, Trazas y Métricas)](#Observabilidad-(Logs,-Errores,-Trazas-y-Métricas))
+    - [Observabilidad Logs, Errores, Trazas y Métricas](#Observabilidad-Logs,-Errores,-Trazas-y-Métricas)
 
 ---
 
