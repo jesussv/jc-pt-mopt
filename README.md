@@ -60,7 +60,7 @@
 - gcloud config set project (Nombre proyecto)
 - gcloud config set run/region
 
-###Pasos.
+Pasos.
 1. Hay que Ubicarse en la carpeta donde está el backend (donde está el .csproj):
    cd services/JC.LocationIngest
 
