@@ -54,10 +54,10 @@
 ---
 
 ### 1) Autenticación y proyecto
-bash
-gcloud auth login
-gcloud config set project evocative-reef-133021
-gcloud config set run/region us-central1
+- bash
+- gcloud auth login
+- gcloud config set project (Nombre proyecto)
+- gcloud config set run/region 
 
 
 ## Selección de tecnologías
