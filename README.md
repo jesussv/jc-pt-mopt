@@ -132,7 +132,7 @@ gcloud run services describe c-location-ingest-dev \
   <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/WEB2.png" width="600" />
 </p>
 <p align="center">
-  <img src="[https://github.com/jesussv/jc-pt-mopt/blob/main/apk3.png](https://github.com/jesussv/jc-pt-mopt/blob/main/WEB3.png)" width="600" />
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/WEB3.png" width="600" />
 </p>
 
 
