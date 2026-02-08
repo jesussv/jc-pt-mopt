@@ -17,7 +17,7 @@
 - [Demo Movil y Web](#Demo-Movil-y-Web)
 - [Ciclo de Vida, Metodologías Ágiles y Planificación](#Ciclo-de-Vida,-Metodologías-Ágiles-y-Planificación)
   - [Metodología de trabajo](#Metodología-de-trabajo)
-  - [📅 Cronograma del MVP (Diagrama Gantt)](#📅-Cronograma-del-MVP-(Diagrama-Gantt))
+  - [Cronograma del MVP (Diagrama Gantt)](#Cronograma-del-MVP-(Diagrama-Gantt))
   - [Estrategia de QA](#Estrategia-de-QA)
 - [🏗️ Infraestructura y Automatización](#🏗️-Infraestructura-y-Automatización)
     - [Pipeline de CI/CD (GitHub → Cloud Run)](#Pipeline-de-CI/CD-(GitHub-→-Cloud-Run))
@@ -325,7 +325,7 @@ Como el proyecto está por fases, el planning se alinea así:
 7. Pruebas y QA del MVP  
 8. Ajustes finales y despliegue del MVP
 
-## 📅 Cronograma del MVP (Diagrama Gantt)
+## Cronograma del MVP (Diagrama Gantt)
 
 <p align="center">
   <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/_20260207.png" width="1024" />
