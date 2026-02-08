@@ -368,18 +368,11 @@ Como el proyecto está por fases, el planning se alinea así:
 - Fixes finales
 - Deploy a producción
 - Validación post despliegue
-## 🧪 Estrategia de QA (rápido, pero sin quebrar nada)
 
-**Principio:** *Ir rápido sin dañar nada*  
+## 🧪 Estrategia de QA (rápido, pero dañar nada)
 - Cada **Pull Request** valida **calidad mínima** (quality gate).  
 - Cada merge a **main** valida **integración real**.  
 - Antes de producción validamos el **flujo completo del MVP** con E2E críticos.
-
-<p align="center">
-  <img src="https://img.shields.io/badge/QA-Quality%20Gates-0A66C2?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Tests-Unit%20%7C%20Integration%20%7C%20E2E-222222?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Release-Staging%20%E2%86%92%20Prod-2EA44F?style=for-the-badge" />
-</p>
 
 ---
 
@@ -434,7 +427,7 @@ Como el proyecto está por fases, el planning se alinea así:
 
 ---
 
-## ⚙️ CI/CD: ¿En qué etapa se ejecutan las pruebas?
+## ⚙️ CI/CD: Etapa de ejecución de pruebas.
 
 ### 1) Pull Request (PR) — **Quality Gate rápido**
 Se ejecuta en cada PR para impedir que entre “basura”:
