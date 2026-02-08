@@ -248,38 +248,67 @@ Se utilizará **Trunk Based Development**, PRs cortos y frecuentes + CI fuerte +
 
 ---
 ## Ciclo de Vida, Metodologías Ágiles y Planificación
-
-<p align="center">
-  <img src="https://www.scrumalliance.org/images/default-source/about/scrum-alliance-story.png?sfvrsn=1e7950d4_1" width="520" />
-</p>
-
 ### Metodología de trabajo
-
 Para este proyecto yo me voy con **Scrum** (gestión de proyectos de metodología ágil).
 
 Scrum me sirve porque tengo un **MVP con fecha**, fases claras y necesito **entregas por bloques** (UX listo → API lista → Frontend listo → integración → QA → deploy), asegurando avance continuo y validación temprana.
 
-### Cómo lo aplicaremos (en simple y práctico)
+## 🔄 Cómo aseguro la sincronización Backend + Frontend + UX (sin bloqueos lo principal)
 
-- **Sprints cortos (1–2 semanas)** con alcance claro.
-- **Backlog priorizado** (primero lo que desbloquea: Auth, productos, inventario, movimientos).
-- **Incrementos funcionales por sprint**: cada sprint deja algo usable o testeable.
-- **Definición de Hecho (DoD)**: una historia “terminada” significa:
-  - funciona en dev,
-  - tiene validación mínima,
-  - pasó QA básico,
-  - y está lista para demo.
+El objetivo no es “hacer reuniones por hacerlas”, sino ejecutar **las mínimas necesarias** para sincronizar dependencias y mantener el avance continuo.
 
-### Ceremonias mínimas (sin burocracia)
+### ✅ Principios que evitán bloqueos
 
-- **Sprint Planning** (60–90 min): qué entra al sprint + responsables.
-- **Daily** (10–15 min): avances, bloqueos y siguiente paso.
-- **Review/Demo** (30–45 min): validar incremento con negocio.
-- **Retrospectiva** (30 min): mejoras al proceso.
-- **Refinement** (30–45 min): preparar backlog del siguiente sprint.
+**1) UX no bloquea a Frontend (Desarrollo en Flutter)**  
+Para que Frontend no se quede esperando (o inventando), UX debe definir a tiempo:
+- Pantallas y flujos
+- Estados: vacío / cargando / error
+- Validaciones y mensajes
+- Componentes reutilizables y comportamiento
+
+**2) Backend no bloquea a Frontend**  
+Para que el Frontend no se frene, Backend debe acordar temprano:
+- Endpoints y contratos (DTO)
+- Códigos de error y respuestas estándar
+- Paginación, filtros y ordenamiento
+
+> Mientras el backend termina, el frontend avanza con **mocks/stubs** basados en contratos acordados, sin romperse después.
+
+**3) QA prueba en tiempo real (no al final)**  
+QA valida cada incremento desde temprano, detectando fallas antes de llegar a “la semana de pruebas”.
+
+---
+
+### 🧩 Cadencia mínima de coordinación (todo bien ejecutado)
+
+#### 1) Daily (15 min)
+- Cada persona dice: **qué hizo, qué hará, qué la bloquea**
+- Si el bloqueo es de UX o API, **se resuelve ese mismo día** (no “mañana vemos”)
+
+#### 2) Planning (inicio de cada bloque de trabajo)
+Como el proyecto está por fases, el planning se alinea así:
+- Semana 1: Descubrimiento (qué se define y qué queda “listo”)
+- Semana 2: Diseño UI/UX + Arquitectura
+- Semana 3–4: Desarrollo Backend
+- Semana 4–5: Desarrollo Frontend
+- Semana 5: Integración
+- Semana 6: QA
+- Semana 7: Deploy
+
+#### 3) Refinement (1 vez por semana)
+- Dejar “cocinadas” las historias de la siguiente semana
+- UX + Backend + Frontend alinean **criterios de aceptación** y detalles
+
+#### 4) Demo semanal (30–45 min)
+- Se muestra lo que **ya funciona** (aunque sea parcial)
+- Detecta errores temprano antes de llegar a QA
+
+#### 5) Retro (30–45 min semanal o por fase)
+- No es para “hablar bonito”, es para acordar **1 mejora concreta por semana**
+  - Ej.: “API contract congelado a mitad de semana 2”
+  - Ej.: “No se cambian pantallas en semana 5”
 
 ### Planificación del MVP (flujo)
-
 1. Descubrimiento + análisis UX  
 2. Prototipo UI/UX  
 3. Definición de arquitectura Backend  
@@ -288,3 +317,56 @@ Scrum me sirve porque tengo un **MVP con fecha**, fases claras y necesito **entr
 6. Integración Backend–Frontend  
 7. Pruebas y QA del MVP  
 8. Ajustes finales y despliegue del MVP
+
+## 📅 Cronograma del MVP (Diagrama Gantt)
+
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/_20260207.png" width="720" />
+</p>
+
+> Este Gantt define el **camino crítico del MVP** y asegura entregas por bloques:  
+> **UX listo → API lista → Frontend listo → Integración → QA → Deploy**
+
+---
+
+### Semana 1 (10/02 – 14/02): Descubrimiento UX
+**Objetivo:** dejar definido qué entra al MVP y cómo se ve el flujo.
+- Workshop rápido: alcance MVP + user flows
+- Backlog inicial con historias claras
+
+### Semana 2 (17/02 – 21/02): Diseño UI/UX + Arquitectura Backend
+**Objetivo:** aquí se “cierra” el diseño base y se define el mapa técnico.
+- UX entrega prototipo navegable
+- Backend define arquitectura, seguridad, modelo DB, contratos API
+
+### Semana 3–4 (24/02 – 06/03): Desarrollo Backend MVP
+**Objetivo:** API lista para que Frontend consuma.
+- Endpoints principales
+- Lógica base del inventario y movimientos
+- Logging y errores controlados
+
+### Semana 4–5 (02/03 – 13/03): Desarrollo Frontend MVP
+**Objetivo:** app Flutter operativa con pantallas y consumo de API.
+- UI según prototipo
+- Navegación y formularios
+- Validaciones básicas
+
+### Semana 5 (09/03 – 13/03): Integración Backend–Frontend
+**Objetivo:** que todo funcione junto.
+- Ajustes de contratos
+- Corrección de edge cases
+- “Smoke test” diario
+
+### Semana 6 (16/03 – 20/03): Pruebas y QA
+**Objetivo:** estabilidad.
+- Pruebas funcionales
+- Regresión mínima
+- Bugs a Kanban de urgencias
+
+### Semana 7 (23/03 – 27/03): Ajustes finales y Deploy
+**Objetivo:** salida limpia.
+- Fixes finales
+- Deploy a producción
+- Validación post despliegue
+
+
