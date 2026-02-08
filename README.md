@@ -18,7 +18,7 @@
 - [Ciclo de Vida, Metodologías Ágiles y Planificación](#Ciclo-de-Vida,-Metodologías-Ágiles-y-Planificación)
   - [Metodología de trabajo](#Metodología-de-trabajo)
   - [📅 Cronograma del MVP (Diagrama Gantt)](#📅-Cronograma-del-MVP-(Diagrama-Gantt))
-  - [🧪 Estrategia de QA](#🧪-Estrategia-de-QA)
+  - [Estrategia de QA](#Estrategia-de-QA)
 - [🏗️ Infraestructura y Automatización](#🏗️-Infraestructura-y-Automatización)
     - [Pipeline de CI/CD (GitHub → Cloud Run)](#Pipeline-de-CI/CD-(GitHub-→-Cloud-Run))
     - [Observabilidad (Logs, Errores, Trazas y Métricas)](#Observabilidad-(Logs,-Errores,-Trazas-y-Métricas))
@@ -376,7 +376,7 @@ Como el proyecto está por fases, el planning se alinea así:
 - Deploy a producción
 - Validación post despliegue
 
-## 🧪 Estrategia de QA
+## Estrategia de QA
 
 - Cada **Pull Request** valida **calidad mínima** (quality gate).  
 - Cada merge a **main** valida **integración real**.  
