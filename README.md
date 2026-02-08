@@ -489,5 +489,155 @@ Después del deploy a Staging:
 ### Semana 7 (Deploy)
 - Solo correcciones y hardening (cero features nuevas).
 - E2E final + smoke + despliegue.
+## 🏗️ Infraestructura y Automatización
+
+### Pipeline de CI/CD (GitHub → Cloud Run)
+
+#### Cómo aplica este pipeline a lo que tenemos
+**Qué hace el pipeline actual**
+- Push a `develop` → despliega a **Cloud Run Dev** (`c-location-ingest-dev`)
+- Push a `main` → despliega a **Cloud Run Prod** (`c-location-ingest`)
+- Usa **Workload Identity Federation (OIDC)** (sin llaves JSON) ✅
+- Despliega con **Buildpacks** usando `--source` (sin Dockerfile) ✅
+
+**Por qué esto es bueno**
+- Elimina manejo de credenciales (seguridad correcta).
+- Mantiene el deploy simple y repetible.
+- Cloud Run compila y despliega automáticamente.
+
+---
+
+### Pipeline recomendado (CI/CD completo) para el MVP
+
+#### Flujo por rama
+- **PR hacia `develop`:** corre CI (lint + unit tests + build). **No despliega**.
+- **Merge/Push a `develop`:** despliega a Dev + **smoke tests**.
+- **PR hacia `main`:** corre CI + (opcional) integración.
+- **Merge a `main`:** despliega a Prod *(ideal con aprobación manual o tag release)*.
+
+---
+
+### YAML (CI + Deploy + Smoke) — listo para pegar
+
+Crear archivo: `.github/workflows/cloudrun.yml`
+
+```yaml
+name: CI/CD - Cloud Run
+
+on:
+  pull_request:
+    branches: ["develop", "main"]
+  push:
+    branches: ["develop", "main"]
+
+env:
+  PROJECT_ID: "evocative-reef-133021"
+  REGION: "us-central1"
+
+  SERVICE_DEV: "c-location-ingest-dev"
+  SERVICE_PROD: "c-location-ingest"
+
+  SERVICE_DIR: "jc-pt-mopt"
+  SOURCE_PATH: "services/JC.LocationIngest"
+
+jobs:
+  # -------------------------
+  # 1) CI - Calidad mínima
+  # -------------------------
+  ci:
+    name: CI (Lint + Tests + Build)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      # Ajusta versión según tu proyecto
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore
+        working-directory: ${{ env.SERVICE_DIR }}/${{ env.SOURCE_PATH }}
+        run: dotnet restore
+
+      - name: Build
+        working-directory: ${{ env.SERVICE_DIR }}/${{ env.SOURCE_PATH }}
+        run: dotnet build -c Release --no-restore
+
+      - name: Unit Tests
+        working-directory: ${{ env.SERVICE_DIR }}/${{ env.SOURCE_PATH }}
+        run: dotnet test -c Release --no-build --logger "trx"
+
+  # -------------------------
+  # 2) Deploy - Solo en push
+  # -------------------------
+  deploy:
+    name: Deploy to Cloud Run
+    runs-on: ubuntu-latest
+    needs: ci
+    if: github.event_name == 'push'
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Google Auth (Workload Identity Federation)
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: "projects/846193025977/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: "jc-cloudrun-pt@evocative-reef-133021.iam.gserviceaccount.com"
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Select service by branch
+        run: |
+          if [ "${GITHUB_REF_NAME}" = "develop" ]; then
+            echo "SERVICE=${{ env.SERVICE_DEV }}" >> $GITHUB_ENV
+            echo "ENV_NAME=Development" >> $GITHUB_ENV
+            echo "ASPNET_ENV=Development" >> $GITHUB_ENV
+          else
+            echo "SERVICE=${{ env.SERVICE_PROD }}" >> $GITHUB_ENV
+            echo "ENV_NAME=Production" >> $GITHUB_ENV
+            echo "ASPNET_ENV=Production" >> $GITHUB_ENV
+          fi
+
+      - name: Deploy (Buildpacks - no Docker)
+        working-directory: ${{ env.SERVICE_DIR }}
+        run: |
+          gcloud run deploy "${{ env.SERVICE }}" \
+            --source "${{ env.SOURCE_PATH }}" \
+            --project "${{ env.PROJECT_ID }}" \
+            --region "${{ env.REGION }}" \
+            --platform managed \
+            --allow-unauthenticated \
+            --port 8080 \
+            --timeout 300 \
+            --memory 512Mi \
+            --set-env-vars ASPNETCORE_ENVIRONMENT=${{ env.ASPNET_ENV }}
+
+      # -------------------------
+      # 3) Smoke test post-deploy
+      # -------------------------
+      - name: Get service URL
+        run: |
+          URL=$(gcloud run services describe "${{ env.SERVICE }}" \
+            --project "${{ env.PROJECT_ID }}" \
+            --region "${{ env.REGION }}" \
+            --format='value(status.url)')
+          echo "SERVICE_URL=$URL" >> $GITHUB_ENV
+          echo "Deployed URL: $URL"
+
+      - name: Smoke Test (health endpoint)
+        run: |
+          # Cambia /health por tu endpoint real (ej /status o /healthz)
+          curl -f "${{ env.SERVICE_URL }}/health"
 
 
