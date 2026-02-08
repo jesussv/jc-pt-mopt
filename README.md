@@ -245,3 +245,46 @@ Se utilizará **Trunk Based Development**, PRs cortos y frecuentes + CI fuerte +
 <p align="center">
   <img src="https://github.com/jesussv/jc-pt-mopt/blob/assets/SCIS_Git_Branching_Flujo.jpg" width="720" />
 </p>
+
+---
+## Ciclo de Vida, Metodologías Ágiles y Planificación
+
+<p align="center">
+  <img src="https://www.scrumalliance.org/images/default-source/about/scrum-alliance-story.png?sfvrsn=1e7950d4_1" width="520" />
+</p>
+
+### Metodología de trabajo
+
+Para este proyecto yo me voy con **Scrum** (gestión de proyectos de metodología ágil).
+
+Scrum me sirve porque tengo un **MVP con fecha**, fases claras y necesito **entregas por bloques** (UX listo → API lista → Frontend listo → integración → QA → deploy), asegurando avance continuo y validación temprana.
+
+### Cómo lo aplicaremos (en simple y práctico)
+
+- **Sprints cortos (1–2 semanas)** con alcance claro.
+- **Backlog priorizado** (primero lo que desbloquea: Auth, productos, inventario, movimientos).
+- **Incrementos funcionales por sprint**: cada sprint deja algo usable o testeable.
+- **Definición de Hecho (DoD)**: una historia “terminada” significa:
+  - funciona en dev,
+  - tiene validación mínima,
+  - pasó QA básico,
+  - y está lista para demo.
+
+### Ceremonias mínimas (sin burocracia)
+
+- **Sprint Planning** (60–90 min): qué entra al sprint + responsables.
+- **Daily** (10–15 min): avances, bloqueos y siguiente paso.
+- **Review/Demo** (30–45 min): validar incremento con negocio.
+- **Retrospectiva** (30 min): mejoras al proceso.
+- **Refinement** (30–45 min): preparar backlog del siguiente sprint.
+
+### Planificación del MVP (flujo)
+
+1. Descubrimiento + análisis UX  
+2. Prototipo UI/UX  
+3. Definición de arquitectura Backend  
+4. Desarrollo Backend MVP  
+5. Desarrollo Frontend MVP  
+6. Integración Backend–Frontend  
+7. Pruebas y QA del MVP  
+8. Ajustes finales y despliegue del MVP
