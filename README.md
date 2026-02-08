@@ -102,7 +102,7 @@ Para ver variables configuradas en el contenedor:
 gcloud run services describe c-location-ingest-dev \
   --region us-central1 \
   --format="yaml(spec.template.spec.containers[0].env)"
-###Demo Movil y Web
+### Demo Movil y Web
 ## 🚀 DESCARGA LA APP DEMO
 > **Instala SCIS y empezá a probar como controlar un inventario.**  
 ✅ Login seguro • ✅ Entradas/Salidas • ✅ Ajustes • ✅ Transferencias • ✅ Stock por bodega • ✅ Movimientos
@@ -112,12 +112,24 @@ gcloud run services describe c-location-ingest-dev \
     <img src="https://img.shields.io/badge/📥%20DESCARGAR%20APP-Releases-brightgreen?style=for-the-badge" />
   </a>
 </p>
-<!-- ✅ Preview -->
+<!-- ✅ Preview Movil -->
 <p align="center">
   <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk1.png" width="720" />
 </p>
 <p align="center">
   <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk2.png" width="720" />
+</p>
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk3.png" width="720" />
+</p>
+
+## 🚀 VERSION WEB DEMO
+### <!-- ✅ Preview WEB -->
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/WEB1.png" width="720" />
+</p>
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/WEB2.png" width="720" />
 </p>
 <p align="center">
   <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk3.png" width="720" />
