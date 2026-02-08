@@ -368,5 +368,133 @@ Como el proyecto está por fases, el planning se alinea así:
 - Fixes finales
 - Deploy a producción
 - Validación post despliegue
+## 🧪 Estrategia de QA (rápido, pero sin quebrar nada)
+
+**Principio:** *Ir rápido sin romper nada.*  
+- Cada **Pull Request** valida **calidad mínima** (quality gate).  
+- Cada merge a **main** valida **integración real**.  
+- Antes de producción validamos el **flujo completo del MVP** con E2E críticos.
+
+<p align="center">
+  <img src="https://img.shields.io/badge/QA-Quality%20Gates-0A66C2?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Tests-Unit%20%7C%20Integration%20%7C%20E2E-222222?style=for-the-badge" />
+  <img src="https://img.shields.io/badge/Release-Staging%20%E2%86%92%20Prod-2EA44F?style=for-the-badge" />
+</p>
+
+---
+
+### ✅ 1) Pruebas Unitarias (rápidas y muchas)
+
+**Dónde aplican**
+- **Backend:** reglas de negocio y validaciones  
+  *(ej.: OUT no permite stock negativo, ADJUST respeta reglas, TRANSFER descuenta y suma, etc.)*
+- **Frontend (Flutter):** validación de formularios, mapeos de modelos, formateo, estados (loading/error/empty) y lógica simple de UI.
+
+**Por qué son clave**
+- Son las más rápidas y baratas.
+- Detectan fallos antes de que lleguen a integración.
+
+**Meta práctica (MVP)**
+- **Backend:** cubrir lo crítico (movimientos + reglas de stock + validaciones).
+- **Flutter:** cubrir validaciones y lógica de pantalla *(sin intentar testear UI completa todavía)*.
+
+---
+
+### 🔗 2) Pruebas de Integración (API + DB + Contratos)
+
+**Qué validan**
+- Endpoints funcionando con **base real** y datos reales.
+- Transacciones y constraints sin romperse.
+- Respuesta del API **coincide con el contrato** que consume Flutter.
+
+**Casos críticos**
+- Crear movimiento **IN / OUT / ADJUST / TRANSFER** y verificar saldo resultante por bodega.
+- Reglas: **no permitir OUT** si no hay stock.
+- Transfer: **descuenta en origen y suma en destino** (transaccional).
+
+**Por qué son clave aquí**
+- El riesgo grande está en **stock + transacciones**.
+- Aquí es donde se rompe un MVP si no se prueba.
+
+---
+
+### 🧭 3) Pruebas E2E (pocas, pero las más importantes)
+
+**Regla de oro:** En el MVP no hacemos 200 E2E. Hacemos **8–12 flujos críticos** que garantizan operación.
+
+**Flujos E2E mínimos recomendados**
+1. Login exitoso y navegación básica  
+2. Consulta de productos + búsqueda  
+3. Ver inventario: seleccionar producto y ver stock por bodega  
+4. Movimiento **IN** y ver stock actualizado  
+5. Movimiento **OUT** con validación de stock  
+6. **TRANSFER** origen → destino y ver resultados en ambas bodegas  
+7. **ADJUST** y ver saldo final  
+8. Auditoría básica: visualizar movimientos recientes
+
+---
+
+## ⚙️ CI/CD: ¿En qué etapa se ejecutan las pruebas?
+
+### 1) Pull Request (PR) — **Quality Gate rápido**
+Se ejecuta en cada PR para impedir que entre “basura”:
+- ✅ Lint/Format (backend y Flutter)
+- ✅ Unit Tests (backend + Flutter)
+- ✅ Build/Compile (backend + Flutter)
+- ✅ (Opcional rápido) análisis estático / seguridad básica
+
+> **Regla:** si falla aquí, **no se mergea**.
+
+---
+
+### 2) Merge a main — **Integración real**
+Cuando el cambio entra a `main`:
+- ✅ Integración (API + DB)
+  - Ideal: DB efímera en CI (contenedor) o DB de test aislada
+- ✅ Build de artefactos
+- ✅ Deploy automático a **Staging** (Cloud Run)
+
+---
+
+### 3) Staging — **E2E + Smoke tests**
+Después del deploy a Staging:
+- ✅ E2E tests (solo flujos críticos)
+- ✅ Smoke test (arranque, login, consulta, crear 1 movimiento)
+- ✅ Reporte de resultados (pasó / no pasó)
+
+> **Regla:** si E2E falla, **no se promueve** a producción.
+
+---
+
+### 4) Producción — **Despliegue seguro**
+- Deploy a Cloud Run usando **revisiones** (release controlado).
+- Monitoreo post-deploy:
+  - Errores **5xx**
+  - Latencia
+  - Logs de negocio (movimientos, fallos de validación)
+
+---
+
+## 🗓️ Cómo aterriza al cronograma del MVP
+
+### Semanas 3–4 (Backend MVP)
+- Unit tests de reglas de stock y movimientos desde el día 1.
+- Integración API+DB para endpoints principales.
+
+### Semanas 4–5 (Frontend MVP)
+- Unit tests de validaciones y mapeos.
+- Smoke manual rápido diario contra staging/dev.
+
+### Semana 5 (Integración)
+- Enfoque fuerte a pruebas de integración y contratos API.
+- Empezar E2E mínimos en staging.
+
+### Semana 6 (QA)
+- Regresión completa + E2E críticos.
+- Fixes van a Kanban de bugs con prioridad.
+
+### Semana 7 (Deploy)
+- Solo correcciones y hardening (cero features nuevas).
+- E2E final + smoke + despliegue.
 
 
