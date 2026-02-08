@@ -648,13 +648,6 @@ jobs:
 ```
 ## ✅ Resumen operativo (CI/CD + Observabilidad)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/CI-Build%20%2B%20Unit%20Tests-0A66C2?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/CD-Dev%20%E2%86%92%20Prod-2EA44F?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Security-OIDC%20(WIF)-222222?style=for-the-badge" />
-  <img src="https://img.shields.io/badge/Smoke-Post--Deploy-6F42C1?style=for-the-badge" />
-</p>
-
 - **CI (Integración continua):** cada PR corre **build + unit tests**. Si falla, **no se mezcla** el cambio.  
 - **CD (Despliegue continuo):** merge/push a `develop` despliega a **Dev**; merge a `main` despliega a **Prod**.  
 - **Seguridad:** **Workload Identity Federation** (GitHub se autentica **sin llaves**).  
@@ -662,7 +655,7 @@ jobs:
 
 ---
 
-## 📡 Observabilidad (Logs, Errores, Trazas y Métricas)
+## Observabilidad Logs, Errores, Trazas y Métricas
 
 ### Logging centralizado para rastreo de un error distribuido.
 
@@ -748,7 +741,32 @@ Cuando alguien diga “se cayó inventario” o “No funciona”:
 4. Abro **Cloud Trace** para ubicar el punto exacto de falla/lentitud.
 5. Reviso **Cloud Monitoring** para confirmar si fue Cloud Run o Cloud SQL.
 
-## Anexos
+## 📎 Anexos
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsqlstudio.jpg"><img src="" width="720" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun.png"><img src="" width="720" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun2.png"><img src="" width="720" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudrun3.png"><img src="" width="720" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/cloudsql.png"><img src="" width="720" /></a>
+</p>
+
+<p align="center">
+  <a href="https://github.com/jesussv/jc-pt-mopt/blob/main/clouderror.png"><img src="" width="720" /></a>
+</p>
+
 
 
 
