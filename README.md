@@ -27,7 +27,28 @@
 
 4. Descargamos el proyecto adjunto.
 
+## Deploy a Google Cloud Run
+
+> Este deploy aplica para el **Backend (ASP.NET Core Minimal APIs .NET 8)**.
+
+### Prerrequisitos
+- Tener un proyecto en Google Cloud.
+- Tener habilitado:
+  - **Cloud Run**
+  - **Cloud Build**
+  - **Artifact Registry**
+  - (Opcional) **Secret Manager**
+- Tener instalado y autenticado `gcloud` (o usar **Cloud Shell**).
+
 ---
+
+### Deploy manual desde Cloud Shell o gcloud
+
+#### 1) Autenticación y proyecto
+```bash
+gcloud auth login
+gcloud config set project evocative-reef-133021
+gcloud config set run/region us-central1
 
 ## Selección de tecnologías
 
