@@ -14,6 +14,7 @@
 - [Diagramas de arquitectura](#diagramas-de-arquitectura)
 - [Estrategia de branching](#estrategia-de-branching)
 - [Deploy a Google Cloud Run](#Deploy-a-Google-Cloud-Run)
+- [Demo Movil y Web](#Demo-Movil-y-Web)
 
 ---
 
@@ -101,6 +102,27 @@ Para ver variables configuradas en el contenedor:
 gcloud run services describe c-location-ingest-dev \
   --region us-central1 \
   --format="yaml(spec.template.spec.containers[0].env)"
+###Demo Movil y Web
+## 🚀 DESCARGA LA APP DEMO
+> **Instala SCIS y empezá a probar como controlar un inventario.**  
+✅ Login seguro • ✅ Entradas/Salidas • ✅ Ajustes • ✅ Transferencias • ✅ Stock por bodega • ✅ Movimientos
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1As7YoFjR2aEGx0lt0hOshhIq4LVGYQHV/view?usp=sharing">
+    <img src="https://img.shields.io/badge/📥%20DESCARGAR%20APP-Releases-brightgreen?style=for-the-badge" />
+  </a>
+</p>
+<!-- ✅ Preview -->
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk1.png" width="720" />
+</p>
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk2.png" width="720" />
+</p>
+<p align="center">
+  <img src="https://github.com/jesussv/jc-pt-mopt/blob/main/apk3.png" width="720" />
+</p>
+
 
 ## Selección de tecnologías
 
