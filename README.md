@@ -5,6 +5,17 @@
 
 ---
 
+## Tabla de contenidos
+- [Instrucciones de instalación](#instrucciones-de-instalación)
+- [Selección de tecnologías](#selección-de-tecnologías)
+  - [Backend](#backend)
+  - [Frontend](#frontend)
+- [Motor de base de datos](#motor-de-base-de-datos)
+- [Diagramas de arquitectura](#diagramas-de-arquitectura)
+- [Estrategia de branching](#estrategia-de-branching)
+
+---
+
 ## Instrucciones de instalación
 
 1. Nos registramos en Google Cloud e ingresamos a **Cloud SQL**.
