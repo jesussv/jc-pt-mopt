@@ -61,7 +61,7 @@
 - gcloud config set run/region
 
 1. Pasos.
-\`\`\`
+\`\`\`c#
 Hay que Ubicarse en la carpeta donde está el backend (donde está el .csproj):
 
 cd services/JC.LocationIngest
