@@ -80,17 +80,19 @@ gcloud run deploy c-location-ingest-dev \
   --add-cloudsql-instances evocative-reef-133021:us-central1:jchavez-pt-mopt-dev2026 \
   --set-secrets "ConnectionStrings__JCPostgres=jc-connstr:latest,Jwt__Key=jc-jwt-key:latest" \
   --allow-unauthenticated
-
+  
 Obtener la URL del servicio
 gcloud run services describe c-location-ingest-dev \
   --region us-central1 \
   --format="value(status.url)"
+
 ---
 5. Validación rápida (health/status)
 
 power-Shell
 curl -s "$(gcloud run services describe c-location-ingest-dev --region us-central1 --format='value(status.url)')/health"
 Ajustar /health por  endpoint real si se llama distinto.
+
 ---
 6. Variables de entorno 
 
